@@ -4,14 +4,15 @@
 #include <vector>
 #include "Arco.h"
 
-using namespace std;
+// using namespace std;
 
 class Grafo{
 	
 	public:
 
 // NOTA: Dependiendo de la implementación puede ser necesario incluir otras funciones constructuras
-	Grafo(int v);
+	Grafo(const int & v);
+	
 	Grafo(const Grafo & otroGrafo);
 
 	~Grafo();
@@ -30,7 +31,7 @@ class Grafo{
 	// PRE CONDICION: existe_arco(origen, destino)
 //	const un_tipo & costo_arco(int origen, int destino) const;
 
-	void devolver_vertices(list<int> & vertices) const;
+	void devolver_vertices(std::list<int> & vertices) const;
 
 //	void devolver_adyacentes(int origen, list<Arco<un_tipo>> & adyacentes) const;
 
@@ -51,26 +52,11 @@ class Grafo{
 
 	void vaciar();
 
-private:
-	/*
-	 * Definir la estructura interna
-	 */
-	list< Arco <int> > lista_arcos;
-	vector< list < Arco <int> > > vertices;
+	private:
 
-    //Algunas alternativas vistas en la presentación.
-    /*struct Vertice {
-        int v;
-        list<Arco> adyacentes;
-    };
+		std::list<int> lista_arcos;
+		std::vector< std::list<int> > vertices;
 
-    list<Vertice> vertices;
-
-    map<int, list<Arco> > vertices;
-
-    map<int, map<int, C> > vertices;
-
-    C ** matriz;*/
-}; // class Grafo
+};
 
 #endif

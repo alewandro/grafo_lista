@@ -1,16 +1,14 @@
+#include <vector>
 #include "iostream"
 #include "Grafo.h"
 
-	Grafo::Grafo(int v){
-		
-		// list< Arco <int> > lista_arcos();
+using namespace std;
 
-		// vector< list < Arco <int> > > vertices(v, list< Arco <int> > ());
-		vector< list < Arco <int> > > vertices(v);
-		/*for (int i=0; i<v; i++)
-			vector< list < Arco <int> > > vertices.push_back();
-		*/
-		cout << "longitud " << vertices.size() << endl;
+	Grafo::Grafo(const int & v){
+		
+		for (int i=0; i<v; i++)
+			vertices.push_back(lista_arcos);
+
 	}
 
 
@@ -32,20 +30,25 @@
 
 	// Devuelve true si la cantidad de vértices es cero
 	bool Grafo::esta_vacio() const{
-
+		if (vertices.size() == 0)
+			return true;
+		else
+			return false;
 
 	}
+
 	// Indica la cantidad de vértices del grafo
 	int Grafo::devolver_longitud() const{
-			
-		cout << "longitud " << vertices.size() << endl;
-
 		return vertices.size();
-
 	}
 
-	bool Grafo::existe_vertice(int vertice) const{
 
+
+	bool Grafo::existe_vertice(int vertice) const{
+		if ((vertices.size() - 1) >= vertice)
+			return true;
+		else
+			return false;
 
 	}
 
@@ -61,8 +64,11 @@
 
 	}
 */
-	void Grafo::devolver_vertices(list<int> & vertices) const{
-
+	void Grafo::devolver_vertices(list<int> & listado_vertices) const{
+		listado_vertices.empty();
+		int longitud= vertices.size();
+		for (int i=0; i<longitud; i++)
+			listado_vertices.push_back(i);
 
 	}
 
@@ -72,7 +78,11 @@
 	}
 */
 	void Grafo::agregar_vertice(int vertice){
-
+		// si quisiera algun nombre en especia deberia
+		// llevar aparte un arreglito con los nombres y listo
+		// por defecto se agrega un vertice al final:
+		lista_arcos.empty();
+		vertices.push_back(lista_arcos);
 
 	}
 

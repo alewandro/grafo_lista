@@ -2,6 +2,7 @@
 #include "Arco.h"
 #include "Grafo.h"
 #include "list"
+#include "vector"
 
 using namespace std;
 
@@ -18,6 +19,17 @@ void imprimir_lista(list<Arco> una_lista){
 }
 */
 
+void imprimir_lista(list<int> una_lista){
+    cout << endl;
+    list<int>::iterator iterador= una_lista.begin();
+    while (iterador != una_lista.end()) {
+        int vertice= *iterador;
+        cout << *iterador << "  ";
+        iterador++;
+    }
+    cout << endl;
+}
+
 void imprimir_menu(){
 	
 	cout << "****************************************" << endl;
@@ -33,7 +45,9 @@ void imprimir_menu(){
     cout << " 8- Agregar Vertice" << endl;
     cout << " 9- Eliminar Vertice" << endl;
     cout << "10- ver Cantidad de Vertices" << endl;
-    cout << "11- ver Matriz de Adyacencia" << endl;
+    cout << "11- el Grafo es vacio (vertices=0)?" << endl;
+    cout << "12- existe vertice?" << endl;
+    cout << "13- Listar Vertices" << endl;
     cout << endl;
     cout << "0- Salir" << endl;
 	cout << "****************************************" << endl;
@@ -41,11 +55,13 @@ void imprimir_menu(){
 
 
 int main(){
-    int vertices, opcion;
-    cout << "Ingrese cantidad de vertices: ";
+    int vertices, opcion, vertice;
+    list<int> listado_vertices;
+
+    cout << endl << "Ingrese cantidad de vertices: ";
     cin >> vertices;
     Grafo un_grafo(vertices);
-    cout << "Grafo de " << vertices << " vertices creado" << endl << endl;
+    cout << endl << "Grafo de " << un_grafo.devolver_longitud() << " vertices creado" << endl << endl;
 
     imprimir_menu();
     cin >> opcion;
@@ -117,12 +133,18 @@ int main(){
                 imprimir_lista(lista_arcos);
             }
                 break;
+            */
             case 8:{
-                un_grafo.Agregar_vertice();
-                cout << endl <<  "Vertice Agregado! " << endl;
-                cout << "Cantidad de vertices: " << un_grafo.Cantidad_vertices() << endl;
+                // si quisiera algun nombre en especia deberia
+                // llevar aparte un arreglito con los nombres y listo
+                // por defecto se agrega un vertice al final:
+                
+                un_grafo.agregar_vertice(0);
+                cout << endl <<  "1 Vertice Agregado! " << endl;
+                cout << "nueva Cantidad de vertices: " << un_grafo.devolver_longitud() << endl;
             }
                 break;
+            /*
             case 9:{
                 cout << "Ingrese el N° de Vertice a Eliminar: ";
                 cin >> vert;
@@ -137,7 +159,25 @@ int main(){
             }
                 break;
             case 11:{
-                // imprimir_matriz(un_grafo, vertices);
+                if (un_grafo.esta_vacio())
+                    cout << "NO existen vertices. Grafo VACIO" << endl;
+                else
+                    cout << "Existen vertices. Grafo NO vacio" << endl;
+            }
+                break;
+            case 12:{
+                cout << "ingrese en vertice a verificar (0...n): ";
+                cin >> vertice;
+                cout << endl;
+                if (un_grafo.existe_vertice(vertice))
+                    cout << "El vertice " << vertice << " Existe!" << endl;
+                else
+                    cout << "El vertice " << vertice << " NO Existe!" << endl;
+            }
+                break;
+            case 13:{
+                un_grafo.devolver_vertices(listado_vertices);
+                imprimir_lista(listado_vertices);
             }
                 break;
             default:{
@@ -146,6 +186,10 @@ int main(){
             break;
 
         }
+
+        cout << endl << "Presione <ENTER> para continuar.." << endl;
+        cin.ignore();
+        cin.ignore();
 
         imprimir_menu();
         cin >> opcion;
