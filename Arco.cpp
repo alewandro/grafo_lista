@@ -7,11 +7,11 @@
 			costo= c;
 
 	}
-
+/*
 	template <typename un_tipo> 
 		Arco<un_tipo>::~Arco(){
 	}
-
+*/
 	template <typename un_tipo> 
 		int Arco<un_tipo>::Devolver_origen() const{
 			return origen;

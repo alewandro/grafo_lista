@@ -5,7 +5,8 @@ template <typename un_tipo>
 	class Arco{
 		public:
 			Arco(const int o, const int d, const un_tipo c);
-			virtual ~Arco();
+			
+			// virtual ~Arco();
 
 			int Devolver_origen() const;
 			int Devolver_destino() const;

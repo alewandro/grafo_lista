@@ -1,6 +1,7 @@
 #ifndef GRAFO_H
 #define GRAFO_H
 #include <list>
+#include <vector>
 #include "Arco.h"
 
 using namespace std;
@@ -10,7 +11,7 @@ class Grafo{
 	public:
 
 // NOTA: Dependiendo de la implementación puede ser necesario incluir otras funciones constructuras
-	Grafo();
+	Grafo(int v);
 	Grafo(const Grafo & otroGrafo);
 
 	~Grafo();
@@ -27,11 +28,11 @@ class Grafo{
 	bool existe_arco(int origen, int destino) const;
 
 	// PRE CONDICION: existe_arco(origen, destino)
-	const un_tipo & costo_arco(int origen, int destino) const;
+//	const un_tipo & costo_arco(int origen, int destino) const;
 
 	void devolver_vertices(list<int> & vertices) const;
 
-	void devolver_adyacentes(int origen, list<Arco<un_tipo>> & adyacentes) const;
+//	void devolver_adyacentes(int origen, list<Arco<un_tipo>> & adyacentes) const;
 
 	void agregar_vertice(int vertice);
 
@@ -39,11 +40,11 @@ class Grafo{
 	void eliminar_vertice(int vertice);
 
 	// PRE CONDICION: existeArco(origen, destino)
-	void modificar_costo_arco(int origen, int destino, const un_tipo & costo);
+//	void modificar_costo_arco(int origen, int destino, const un_tipo & costo);
 
 	// PRE CONDICION: existeVertice(origen) && existeVertice(destino)
 	// POST CONDICION: existeArco(origen, destino)
-	void agregar_arco(int origen, int destino, const un_tipo & costo);
+//	void agregar_arco(int origen, int destino, const un_tipo & costo);
 
 	// POST CONDICION: !existeArco(origen, destino)
 	void eliminar_arco(int origen, int destino);
@@ -54,6 +55,8 @@ private:
 	/*
 	 * Definir la estructura interna
 	 */
+	list< Arco <int> > lista_arcos;
+	vector< list < Arco <int> > > vertices;
 
     //Algunas alternativas vistas en la presentación.
     /*struct Vertice {
