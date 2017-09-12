@@ -1,21 +1,19 @@
 #ifndef ARCO_H
 #define ARCO_H
 
-template <typename un_tipo> 
+//template <typename un_tipo_de_costo> 
 	class Arco{
 		public:
-			Arco(const int o, const int d, const un_tipo c);
+			Arco(const int d, const int c);  //const un_tipo_de_costo c
 			
-			// virtual ~Arco();
+			virtual ~Arco();
 
-			int Devolver_origen() const;
 			int Devolver_destino() const;
-			un_tipo Devolver_costo() const;
+			int Devolver_costo() const;
 
 		private:
-			int origen;
 			int destino;
-			un_tipo costo;
+			int costo;  //un_tipo_de_costo
 
 };
 

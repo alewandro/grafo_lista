@@ -4,23 +4,18 @@
 
 using namespace std;
 
-	Grafo::Grafo(const int & v){
-		
+	Grafo::Grafo(const int & v){		
 		for (int i=0; i<v; i++)
 			vertices.push_back(lista_arcos);
-
 	}
-
 
 	Grafo::Grafo(const Grafo & otroGrafo){
 
 	}
 
-
 	Grafo::~Grafo(){
 
 	}
-
 
 
 	Grafo & Grafo::operator = (const Grafo & otroGrafo){
@@ -34,7 +29,6 @@ using namespace std;
 			return true;
 		else
 			return false;
-
 	}
 
 	// Indica la cantidad de vértices del grafo
@@ -43,27 +37,46 @@ using namespace std;
 	}
 
 
-
 	bool Grafo::existe_vertice(int vertice) const{
 		if ((vertices.size() - 1) >= vertice)
 			return true;
 		else
 			return false;
-
 	}
 
 	bool Grafo::existe_arco(int origen, int destino) const{
+		std::list<Arco> copia_lista; 
+		copia_lista= vertices[origen];
+		list<Arco>::iterator un_iterador= copia_lista.begin();
 
+		while (un_iterador != copia_lista.end() && (*un_iterador).Devolver_destino() != destino)
+			un_iterador++;
 
+		if ((*un_iterador).Devolver_destino() == destino)
+			return true;
+		else
+			return false;
 	}
 
-/*
+
 	// PRE CONDICION: existe_arco(origen, destino)
-	const C & Grafo::costo_arco(int origen, int destino) const{
-
+	int Grafo::costo_arco(int origen, int destino) const{
+		std::list<Arco> copia_lista= vertices[origen];
+		
+		if (this-> existe_arco(origen, destino)){
+			list<Arco>::iterator un_iterador= copia_lista.begin();
+			while (un_iterador != copia_lista.end() && (*un_iterador).Devolver_destino() != destino)
+				un_iterador++;
+			return (*un_iterador).Devolver_costo();
+		}else{
+			return 0;  	// PREGUNTAR si la precondicion no se evalua en el MAIN???
+						// porque asi devuelve 0 como costo!!!
+		}
+		
 
 	}
-*/
+
+
 	void Grafo::devolver_vertices(list<int> & listado_vertices) const{
 		listado_vertices.empty();
 		int longitud= vertices.size();
@@ -72,11 +85,11 @@ using namespace std;
 
 	}
 
-/*	void Grafo::devolver_adyacentes(int origen, list<Arco> & adyacentes) const{
-
-
+	void Grafo::devolver_adyacentes(int origen, list<Arco> & adyacentes) const{
+		//adyacentes.empty();
+		adyacentes= vertices[origen];
 	}
-*/
+
 	void Grafo::agregar_vertice(int vertice){
 		// si quisiera algun nombre en especia deberia
 		// llevar aparte un arreglito con los nombres y listo
@@ -88,28 +101,73 @@ using namespace std;
 
 	// POST CONDICION: Para todo vértice v != vertice: !existeArco(v, vertice) && !existeArco(vertice, v)
 	void Grafo::eliminar_vertice(int vertice){
+		//en 2 partes:
+
+		// elimina los arcos que tienen como destino ese vertice 
+		// revisando c/vertice
 
 
+		// despues elimina el vertice
+		// ojo que aca va a cambiar el tamaño del vector y por lo tanto
+		// va a cambiar el destino de todos los arcosposteriores a ese numero de todos los vertices!
+		// 2 estrategias: cambio todos los destinos de todos los arcos
+		// o agrego un struct con 2 campor: nombre(id) y activo/inactivo para los eliminados
+
+		// PREGUNTAR
 	}
 
-/*
+
 	// PRE CONDICION: existeArco(origen, destino)
-	void Grafo::modificar_costo_arco(int origen, int destino, const C & costo){
+	void Grafo::modificar_costo_arco(int origen, int destino, const int &costo){
+		std::list<Arco> copia_lista= vertices[origen];
+		
+		if (this-> existe_arco(origen, destino)){
+			list<Arco>::iterator un_iterador= copia_lista.begin();
+			
+			// avanza el iterador hasta q encuentra el arco en cuestion
+			while (un_iterador != copia_lista.end() && (*un_iterador).Devolver_destino() != destino)
+				un_iterador++;
 
+			// borra el arco
+			copia_lista.erase(un_iterador);
+
+			//agrega un arco nuevo al final con el costo nuevo
+			Arco arco_modificado(destino, costo);
+			copia_lista.push_back(arco_modificado);
+
+			// reemplaza la lista vieja de arcos x la nueva
+			vertices[origen]= copia_lista;
+		}
 
 	}
+
+
 
 	// PRE CONDICION: existeVertice(origen) && existeVertice(destino)
 	// POST CONDICION: existeArco(origen, destino)
-	void Grafo::agregar_arco(int origen, int destino, const C & costo){
-
+	void Grafo::agregar_arco(int origen, int destino, const int & costo){
+		Arco un_arco(destino, costo);
+		vertices[origen].push_back(un_arco);
 
 	}
-*/
 
 	// POST CONDICION: !existeArco(origen, destino)
 	void Grafo::eliminar_arco(int origen, int destino){
+		std::list<Arco> copia_lista= vertices[origen];
+		
+		if (this-> existe_arco(origen, destino)){
+			list<Arco>::iterator un_iterador= copia_lista.begin();
+			
+			// avanza el iterador hasta q encuentra el arco en cuestion
+			while (un_iterador != copia_lista.end() && (*un_iterador).Devolver_destino() != destino)
+				un_iterador++;
 
+			// borra el arco
+			copia_lista.erase(un_iterador);
+
+			// reemplaza la lista vieja de arcos x la nueva
+			vertices[origen]= copia_lista;
+		}
 
 	}
 
