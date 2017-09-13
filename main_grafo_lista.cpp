@@ -31,28 +31,46 @@ void imprimir_lista_vertices(list<int> una_lista){
 }
 
 void imprimir_menu(){
-	
-	cout << "****************************************" << endl;
-	cout << endl << "que desea hacer?" << endl << endl;
-    cout << " 1- Agregar un Arco" << endl;
-    cout << " 2- Eliminar un Arco" << endl;
-    cout << " 3- Ver el Costo de un Arco" << endl;
-    cout << " 4- Existe Arco?" << endl;
-    cout << " 5- Modificar el Costo de un Arco" << endl;
-    cout << " 6- ver Arcos Entrantes" << endl;
-    cout << " 7- ver Arcos Salientes (adyacentes)" << endl;
-    cout << endl;
-    cout << " 8- Agregar Vertice" << endl;
-    cout << " 9- Eliminar Vertice" << endl;
-    cout << "10- ver Cantidad de Vertices" << endl;
-    cout << "11- el Grafo es vacio (vertices=0)?" << endl;
-    cout << "12- existe vertice?" << endl;
-    cout << "13- Listar Vertices" << endl;
-    cout << endl;
-    cout << "0- Salir" << endl;
-	cout << "****************************************" << endl;
+	cout << "                         que desea hacer?" << endl;
+	cout << "o-----------------------------------------------------------------------o" << endl;
+	cout << "| 0- Salir                      |  7- ver Arcos Adyacentes              |" << endl;
+    cout << "| 1- Agregar un Arco            |  8- Agregar Vertice                   |" << endl;
+    cout << "| 2- Eliminar un Arco           |  9- Eliminar Vertice                  |" << endl;
+    cout << "| 3- Ver el Costo de un Arco    | 10- ver Cantidad de Vertices          |" << endl;
+    cout << "| 4- Existe Arco?               | 11- el Grafo es vacio (vertices=0)?   |" << endl;
+    cout << "| 5- Modificar el Costo Arco    | 12- existe vertice?                   |" << endl;
+    cout << "| 6- ver Arcos Entrantes        | 13- Listar Vertices                   |" << endl;
+    cout << "|                               |                                       |" << endl;
+    cout << "------------------------------------------------------------------------o" << endl;
+    cout << "| 14- DFS                                                               |" << endl;
+    cout << "| 15- BFS                                                               |" << endl;
+    cout << "o-----------------------------------------------------------------------o" << endl;
 }
 
+void DFS(Grafo un_grafo){
+    // para todos los vertices: 
+    // arma vector colores: B.lanco -> sin visitar, G.ris -> visitado, N.egro-> completo
+    // arma vector tiempo visita
+    // arma vector tiempo fin
+    std::vector<char> colores;
+    std::vector<int> tiempo_inicial; 
+    std::vector<int> tiempo_final;
+
+    list<int> lista_vertices;
+    un_grafo.devolver_vertices(lista_vertices);
+    
+    list<int>::iterator iterador= lista_vertices.begin();
+
+    while(iterador != lista_vertices.end()){
+        colores.push_back('B');
+    }
+
+    cout << colores.size();
+    for(int i=0; i<colores.size(); i++)
+        cout << i << " -> " << colores.at(i) << endl;
+
+
+}
 
 int main(){
     int vertices, opcion, vertice, origen, destino, costo;
@@ -141,8 +159,8 @@ int main(){
                 break;
             
             case 8:{
-                // si quisiera algun nombre en especia deberia
-                // llevar aparte un arreglito con los nombres y listo
+                // si quisiera algun nombre en especial deberia
+                // llevar aparte otro arreglo con los nombres y listo
                 // por defecto se agrega un vertice al final:
                 
                 un_grafo.agregar_vertice(0);
@@ -150,16 +168,17 @@ int main(){
                 cout << "nueva Cantidad de vertices: " << un_grafo.devolver_longitud() << endl;
             }
                 break;
-            /*
+            
             case 9:{
-                cout << "Ingrese el N° de Vertice a Eliminar: ";
-                cin >> vert;
-                un_grafo.Eliminar_vertice(vert);
-                cout << endl << "Vertice Eliminado! " << endl;
-                cout << "Cantidad de vertices: " << un_grafo.Cantidad_vertices() << endl;
+                // cout << "Ingrese el N° de Vertice a Eliminar: ";
+                // cin >> vert;
+                // un_grafo.Eliminar_vertice(vert);
+                cout << endl << "metodo aun no implementado! " << endl;
+                // cout << endl << "Vertice Eliminado! " << endl;
+                cout << "Cantidad de vertices: " << un_grafo.devolver_longitud() << endl;
             }
                 break;
-            */
+            
             case 10:{
                 cout << endl <<  "Cantidad de vertices: " << un_grafo.devolver_longitud() << endl;
             }
@@ -184,6 +203,9 @@ int main(){
             case 13:{
                 un_grafo.devolver_vertices(listado_vertices);
                 imprimir_lista_vertices(listado_vertices);
+            }
+            case 14:{
+                DFS(un_grafo);
             }
                 break;
             default:{
