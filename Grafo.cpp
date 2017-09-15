@@ -78,7 +78,7 @@ using namespace std;
 
 
 	void Grafo::devolver_vertices(list<int> & listado_vertices) const{
-		listado_vertices.empty();
+		listado_vertices.clear();
 		int longitud= vertices.size();
 		for (int i=0; i<longitud; i++)
 			listado_vertices.push_back(i);
@@ -86,7 +86,7 @@ using namespace std;
 	}
 
 	void Grafo::devolver_adyacentes(int origen, list<Arco> & adyacentes) const{
-		//adyacentes.empty();
+		adyacentes.clear();
 		adyacentes= vertices[origen];
 	}
 
@@ -94,7 +94,7 @@ using namespace std;
 		// si quisiera algun nombre en especia deberia
 		// llevar aparte un arreglito con los nombres y listo
 		// por defecto se agrega un vertice al final:
-		lista_arcos.empty();
+		lista_arcos.clear();
 		vertices.push_back(lista_arcos);
 
 	}
